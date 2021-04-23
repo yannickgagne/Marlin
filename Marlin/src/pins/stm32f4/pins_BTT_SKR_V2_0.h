@@ -207,9 +207,11 @@
 #define HEATER_1_PIN                        PB4   // Heater1
 #define HEATER_BED_PIN                      PD7   // Hotbed
 #define FAN_PIN                             PB7   // Fan0
-#define FAN1_PIN                            PB6   // Fan1
-#define FAN2_PIN                            PB5   // Fan2
+//#define FAN1_PIN                            PB6   // Fan1
+//#define FAN2_PIN                            PB5   // Fan2
 
+#define CONTROLLER_FAN_PIN                  PB5   //FAN1 motor CONTROLLER_FAN
+#define CONTROLLER_FAN_PIN2                 PB6   //FAN2 motor CONTROLLER_FAN
 //
 // Software SPI pins for TMC2130 stepper drivers
 //
@@ -315,7 +317,6 @@
   #define SDIO_D3_PIN                       PC11
   #define SDIO_CK_PIN                       PC12
   #define SDIO_CMD_PIN                      PD2
-  #define SD_DETECT_PIN                     PC14
 
 #elif SD_CONNECTION_IS(LCD)
 

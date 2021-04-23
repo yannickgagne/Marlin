@@ -36,7 +36,7 @@
  */
 
 // Change EEPROM version if the structure changes
-#define EEPROM_VERSION "V83"
+#define EEPROM_VERSION "V84"
 #define EEPROM_OFFSET 100
 
 // Check the integrity of data offsets.
@@ -433,6 +433,10 @@ typedef struct SettingsDataStruct {
   //
   #if CASELIGHT_USES_BRIGHTNESS
     uint8_t caselight_brightness;                        // M355 P
+  #endif
+
+  #if ENABLED(BABYSTEP_DISPLAY_TOTAL)
+    int16_t babystep_z_steps;
   #endif
 
   //
@@ -1376,6 +1380,10 @@ void MarlinSettings::postprocess() {
       EEPROM_WRITE(caselight.brightness);
     #endif
 
+    #if ENABLED(BABYSTEP_DISPLAY_TOTAL)
+      EEPROM_WRITE(babystep.axis_total[BS_AXIS_IND(Z_AXIS)]);
+    #endif
+
     //
     // Password feature
     //
@@ -2289,6 +2297,10 @@ void MarlinSettings::postprocess() {
         EEPROM_READ(caselight.brightness);
       #endif
 
+      #if ENABLED(BABYSTEP_DISPLAY_TOTAL)
+        EEPROM_READ(babystep.axis_total[BS_AXIS_IND(Z_AXIS)]);
+      #endif
+
       //
       // Password feature
       //
@@ -2630,6 +2642,9 @@ void MarlinSettings::reset() {
     TERN_(HAS_FILAMENT_RUNOUT_DISTANCE, runout.set_runout_distance(FILAMENT_RUNOUT_DISTANCE_MM));
   #endif
 
+  #if ENABLED(BABYSTEP_DISPLAY_TOTAL)
+    babystep.axis_total[BS_AXIS_IND(Z_AXIS)] = 0;
+  #endif
   //
   // Tool-change Settings
   //
@@ -3925,6 +3940,14 @@ void MarlinSettings::reset() {
     #if HAS_MULTI_LANGUAGE
       CONFIG_ECHO_HEADING("UI Language:");
       SERIAL_ECHO_MSG("  M414 S", ui.language);
+    #endif
+
+      #if ENABLED(BABYSTEP_DISPLAY_TOTAL)
+      CONFIG_ECHO_HEADING("Babystep total:");
+      // CONFIG_ECHO_START();
+      CONFIG_ECHO_MSG(
+        "  M290 Z", int(babystep.axis_total[BS_AXIS_IND(Z_AXIS)])
+      );
     #endif
   }
 
