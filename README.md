@@ -1,3 +1,19 @@
+# Printer with `BIGTREETECH SKR 2` motherboard
+
+The default configuration files of this source code is the configuration of `BIGTREETECH SKR 2` on `BIQU-B1` priner, There is no need to modify the configuration unless new DIY features are needed
+
+
+# Printer with `BIGTREETECH SKR V1.4` motherboard
+
+The default configuration files of this source code is the configuration of `BIGTREETECH SKR 2` on `BIQU-B1` priner, So you need to make the following changes if your motherboard is `BIGTREETECH SKR V1.4`.
+* `default_envs = LPC1768`                                 
+  ![image](https://user-images.githubusercontent.com/38851044/116395104-44365f80-a856-11eb-98ed-9cb9b6e86203.png)
+* `#define SERIAL_PORT 0`
+* `#define MOTHERBOARD BOARD_BTT_SKR_V1_4`
+  ![image](https://user-images.githubusercontent.com/38851044/116395190-64661e80-a856-11eb-9e1b-af8a79a1dc04.png)
+* Comment out `#define USE_CONTROLLER_FAN` Because `BIGTREETECH SKR V1.4` has no extra fan port for `USE_CONTROLLER_FAN`, (Printer box / motherboard cooling fan)
+  ![image](https://user-images.githubusercontent.com/38851044/116395468-beff7a80-a856-11eb-819c-712cecb21278.png)
+
 # Marlin 3D Printer Firmware
 
 ![GitHub](https://img.shields.io/github/license/marlinfirmware/marlin.svg)
