@@ -767,6 +767,8 @@ class Planner {
       friend void do_homing_move(const AxisEnum, const float, const feedRate_t, const bool);
   #endif
 
+    static void reset_x2_steps(const uint8_t extruder=active_extruder);
+
     /**
      * Planner::buffer_segment
      *

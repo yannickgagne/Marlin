@@ -124,6 +124,8 @@
   #endif
 #endif
 
+#define X_MAX_PIN                          P1_00
+
 //
 // Z Probe (when not Z_MIN_PIN)
 //

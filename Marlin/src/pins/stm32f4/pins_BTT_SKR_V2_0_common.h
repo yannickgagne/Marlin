@@ -25,7 +25,7 @@
 
 // If you have the BigTreeTech driver expansion module, enable BTT_MOTOR_EXPANSION
 // https://github.com/bigtreetech/BTT-Expansion-module/tree/master/BTT%20EXP-MOT
-//#define BTT_MOTOR_EXPANSION
+#define BTT_MOTOR_EXPANSION
 
 #if BOTH(HAS_WIRED_LCD, BTT_MOTOR_EXPANSION)
   #if EITHER(CR10_STOCKDISPLAY, ENDER2_STOCKDISPLAY)
@@ -124,6 +124,8 @@
     #define Z_STOP_PIN                      PC0   // Z-STOP
   #endif
 #endif
+
+#define X_MAX_PIN                           PC15
 
 //
 // Z Probe (when not Z_MIN_PIN)
@@ -234,12 +236,15 @@
 #ifndef FAN_PIN
   #define FAN_PIN                           PB7   // Fan0
 #endif
-#ifndef FAN1_PIN
-  #define FAN1_PIN                          PB6   // Fan1
-#endif
-#ifndef FAN2_PIN
-  #define FAN2_PIN                          PB5   // Fan2
-#endif
+// #ifndef FAN1_PIN
+//   #define FAN1_PIN                          PB6   // Fan1
+// #endif
+// #ifndef FAN2_PIN
+//   #define FAN2_PIN                          PB5   // Fan2
+// #endif
+
+#define CONTROLLER_FAN_PIN                  PB5   //FAN1 motor CONTROLLER_FAN
+#define CONTROLLER_FAN_PIN2                 PB6   //FAN2 motor CONTROLLER_FAN
 
 //
 // Software SPI pins for TMC2130 stepper drivers
