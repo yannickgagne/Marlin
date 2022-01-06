@@ -485,6 +485,10 @@ typedef struct SettingsDataStruct {
     uint8_t caselight_brightness;                        // M355 P
   #endif
 
+  #if ENABLED(BABYSTEP_DISPLAY_TOTAL)
+    int16_t babystep_z_steps;
+  #endif
+
   //
   // PASSWORD_FEATURE
   //
@@ -1454,6 +1458,10 @@ void MarlinSettings::postprocess() {
       EEPROM_WRITE(caselight.brightness);
     #endif
 
+    #if ENABLED(BABYSTEP_DISPLAY_TOTAL)
+      EEPROM_WRITE(babystep.axis_total[BS_AXIS_IND(Z_AXIS)]);
+    #endif
+
     //
     // Password feature
     //
@@ -2394,6 +2402,10 @@ void MarlinSettings::postprocess() {
         EEPROM_READ(caselight.brightness);
       #endif
 
+      #if ENABLED(BABYSTEP_DISPLAY_TOTAL)
+        EEPROM_READ(babystep.axis_total[BS_AXIS_IND(Z_AXIS)]);
+      #endif
+
       //
       // Password feature
       //
@@ -2747,6 +2759,9 @@ void MarlinSettings::reset() {
     TERN_(HAS_FILAMENT_RUNOUT_DISTANCE, runout.set_runout_distance(FILAMENT_RUNOUT_DISTANCE_MM));
   #endif
 
+  #if ENABLED(BABYSTEP_DISPLAY_TOTAL)
+    babystep.axis_total[BS_AXIS_IND(Z_AXIS)] = 0;
+  #endif
   //
   // Tool-change Settings
   //
@@ -3427,6 +3442,14 @@ void MarlinSettings::reset() {
     #endif
 
     TERN_(HAS_MULTI_LANGUAGE, gcode.M414_report(forReplay));
+
+    #if ENABLED(BABYSTEP_DISPLAY_TOTAL)
+      CONFIG_ECHO_HEADING("Babystep total:");
+      // CONFIG_ECHO_START();
+      CONFIG_ECHO_MSG(
+        "  M290 Z", int(babystep.axis_total[BS_AXIS_IND(Z_AXIS)])
+      );
+    #endif
   }
 
 #endif // !DISABLE_M503
